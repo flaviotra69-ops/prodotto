@@ -1,0 +1,20 @@
+data;prodotto;prezzo;sconto;risparmio;prezzo_finale;fascia;esito;errori
+"2026-11-05 14:37:01";s;12;90;10.8;1.2;SUPER;CORRETTO;
+"2026-11-05 14:37:01";s;12;90;10.8;1.2;SUPER;CORRETTO;
+"2026-11-05 14:37:01";s;12;90;10.8;1.2;SUPER;CORRETTO;
+"2026-11-05 14:37:02";s;12;90;10.8;1.2;SUPER;CORRETTO;
+"2026-11-05 14:37:02";s;12;90;10.8;1.2;SUPER;CORRETTO;
+"2026-11-05 14:37:13";s;12;s;0;0;;ERRATO;"Lo sconto dovrebbe essere un numero intero"
+"2026-11-05 14:37:19";s;12;sss;0;0;;ERRATO;"Lo sconto dovrebbe essere un numero intero"
+"2026-11-05 14:37:24";;12;sss;0;0;;ERRATO;"Il prodotto è obbligatorio - Lo sconto dovrebbe essere un numero intero"
+"2026-11-05 14:37:30";;;sss;0;0;;ERRATO;"Il prodotto è obbligatorio - Il prezzo deve essere un numero maggiore di zero - Lo sconto dovrebbe essere un numero intero"
+"2026-11-05 14:37:43";s;12;12;1.44;10.56;PICCOLO;CORRETTO;
+"2026-11-05 14:46:00";sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss;12;0;0;0;;ERRATO;"Il prodotto non può superare 30 caratteri - Lo sconto deve essere compreso tra 1 e 90"
+"2026-11-05 14:46:08";s;12;0;0;0;;ERRATO;"Lo sconto deve essere compreso tra 1 e 90"
+"2026-11-05 14:46:10";s;12;s;0;0;;ERRATO;"Lo sconto dovrebbe essere un numero intero"
+"2026-11-05 14:46:10";s;12;s;0;0;;ERRATO;"Lo sconto dovrebbe essere un numero intero"
+"2026-11-05 14:46:11";s;12;s;0;0;;ERRATO;"Lo sconto dovrebbe essere un numero intero"
+"2026-11-05 14:46:13";s;12;2;0.24;11.76;PICCOLO;CORRETTO;
+"2026-11-05 14:48:24";s;12;s;0;0;;ERRATO;"Lo sconto dovrebbe essere un numero intero"
+"2026-11-05 14:48:28";s;s;s;0;0;;ERRATO;"Il prezzo deve essere un numero maggiore di zero - Lo sconto dovrebbe essere un numero intero"
+"2026-11-05 14:48:33";s;12;12;1.44;10.56;PICCOLO;CORRETTO;
