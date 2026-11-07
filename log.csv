@@ -18,3 +18,9 @@ data;prodotto;prezzo;sconto;risparmio;prezzo_finale;fascia;esito;errori
 "2026-11-05 14:48:24";s;12;s;0;0;;ERRATO;"Lo sconto dovrebbe essere un numero intero"
 "2026-11-05 14:48:28";s;s;s;0;0;;ERRATO;"Il prezzo deve essere un numero maggiore di zero - Lo sconto dovrebbe essere un numero intero"
 "2026-11-05 14:48:33";s;12;12;1.44;10.56;PICCOLO;CORRETTO;
+"2026-11-07 10:53:57";s;12;12;1.44;10.56;PICCOLO;CORRETTO;
+"2026-11-07 10:54:08";s;12;70;8.4;3.6;SUPER;CORRETTO;
+"2026-11-07 10:57:28";s;12;70;8.4;3.6;SUPER
+"2026-11-07 10:57:34";s;12;70;8.4;3.6;SUPER
+"2026-11-07 10:59:03";s;12;70;8.4;3.6;SUPER
+"2026-11-07 10:59:06";s;12;70;8.4;3.6;SUPER

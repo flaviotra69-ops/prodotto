@@ -1,4 +1,3 @@
-
 <?php
 // Iniziamo ogni esercizio con l'Inizializzazione delle variabili
 $prodotto= ""; //valore che inserisce l'utente
@@ -61,35 +60,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // metodo utilizzato per inviare la 
 
     //Salviamo ciò che viene scritto all'Interno di un file CSV
     // Salvataggio del calcolo nel file
-    $file = fopen("log.csv", "a"); // Apre il file log.csv per aggiungere nuovi dati
-    if ($file != false) {
-        if (filesize("log.csv") == 0) {   // Controlla se il file è vuoto
-            // Scrive i nomi delle colonne nel file
-            fputcsv($file, ["data", "prodotto", "prezzo", "sconto", "risparmio", "prezzo_finale", "fascia", "esito", "errori"], ";");
+    if ($calcoloeseguito) {
+        $file = fopen("log.csv", "a"); // Apre il file log.csv per aggiungere nuovi dati
+        if ($file != false) {
+            if (filesize("log.csv") == 0) {   // Controlla se il file è vuoto
+                // Scrive i nomi delle colonne nel file
+                fputcsv($file, ["data", "prodotto", "prezzo", "sconto", "risparmio", "prezzo_finale", "fascia"], ";");
+            }
+
+            fputcsv($file, [ // Scrive i dati del calcolo nel file
+                date("Y-m-d H:i:s"),
+                $prodotto,
+                $prezzo,
+                $sconto,
+                $risparmio,
+                $prezzofinale,
+                $fascia
+            ], ";");
+
+            fclose($file);
         }
-
-        if ($calcoloeseguito) {
-            $esito = "CORRETTO";
-        }
-        else {
-            $esito = "ERRATO";
-        }
-
-        $messaggi_errori = implode(" - ", $errori); // Unisce tutti i messaggi di errore
-
-        fputcsv($file, [ // Scrive i dati del calcolo nel file
-            date("Y-m-d H:i:s"),
-            $prodotto,
-            $prezzo,
-            $sconto,
-            $risparmio,
-            $prezzofinale,
-            $fascia,
-            $esito,
-            $messaggi_errori
-        ], ";");
-
-        fclose($file);
     }
 }
 ?>
@@ -102,44 +92,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") { // metodo utilizzato per inviare la 
     <link rel="stylesheet" href="stile.css">
 </head>
 <body>
-    <h1>Calcolatore di sconto</h1>
-    <!-- FORM -->
-    <form method="post" action="index.php"> <!-- Crea il modulo -->
-        <label for="prodotto">Prodotto</label> <!-- Etichetta prodotto -->
-        <input type="text" id="prodotto" name="prodotto" value="<?= htmlspecialchars($prodotto) ?>"
-        <?php if (isset($errori["prodotto"])) { // Controlla se esiste un errore
-            echo 'class="errore"'; // Evidenzia il campo
-        } ?> >
-        <?php if (isset($errori["prodotto"])) { // Controlla se esiste un errore ?>
-            <p class="msg-errore"><?= $errori["prodotto"] ?></p> <!-- Mostra l'errore -->
-        <?php } ?>
-        <label for="prezzo">Prezzo</label> <!-- Etichetta prezzo -->
-        <input type="text" id="prezzo" name="prezzo" value="<?= htmlspecialchars($prezzo) ?>"
-        <?php if (isset($errori["prezzo"])) { // Controlla se esiste un errore
-            echo 'class="errore"'; // Evidenzia il campo
-        } ?> >
-        <?php if (isset($errori["prezzo"])) { // Controlla se esiste un errore ?>
-            <p class="msg-errore"><?= $errori["prezzo"] ?></p> <!-- Mostra l'errore -->
-        <?php } ?>
-        <label for="sconto">Sconto</label> <!-- Etichetta sconto -->
-        <input type="text" id="sconto" name="sconto" value="<?= htmlspecialchars($sconto) ?>"
-        <?php if (isset($errori["sconto"])) { // Controlla se esiste un errore
-            echo 'class="errore"'; // Evidenzia il campo
-        } ?> >
-        <?php if (isset($errori["sconto"])) { // Controlla se esiste un errore ?>
-            <p class="msg-errore"><?= $errori["sconto"] ?></p> <!-- Mostra l'errore -->
-        <?php } ?>
-        <button type="submit">Calcola</button> <!-- Invia il modulo -->
-    </form>
 
-    <!-- RISULTATO -->
-    <?php if ($calcoloeseguito) { // Controlla se il calcolo è stato eseguito ?>
-        <div class="risultato <?= strtolower($fascia) ?>"> <!-- Mostra il risultato con il colore della fascia -->
-            <h2>Risultato</h2> <!-- Titolo del risultato -->
-            <p>Prodotto: <?= htmlspecialchars($prodotto) ?></p> <!-- Mostra il prodotto -->
-            <p>Prezzo finale: <?= number_format($prezzofinale, 2, ",", ".") ?> €</p> <!-- Mostra il prezzo finale -->
-            <p>Risparmio: <?= number_format($risparmio, 2, ",", ".") ?> €</p> <!-- Mostra il risparmio -->
-            <p>Fascia dello sconto: <?= $fascia ?></p> <!-- Mostra la fascia -->
+    <?php if (!$calcoloeseguito) { ?>
+
+        <h1>Calcolatore di sconto</h1>
+
+        <!-- FORM -->
+        <form method="post" action="index.php"> <!-- Crea il modulo -->
+            <label for="prodotto">Prodotto</label> <!-- Etichetta prodotto -->
+            <input type="text" id="prodotto" name="prodotto" value="<?= htmlspecialchars($prodotto) ?>"
+            <?php if (isset($errori["prodotto"])) { // Controlla se esiste un errore
+                echo 'class="errore"'; // Evidenzia il campo
+            } ?> >
+            <?php if (isset($errori["prodotto"])) { // Controlla se esiste un errore ?>
+                <p class="msg-errore"><?= $errori["prodotto"] ?></p> <!-- Mostra l'errore -->
+            <?php } ?>
+
+            <label for="prezzo">Prezzo</label> <!-- Etichetta prezzo -->
+            <input type="text" id="prezzo" name="prezzo" value="<?= htmlspecialchars($prezzo) ?>"
+            <?php if (isset($errori["prezzo"])) { // Controlla se esiste un errore
+                echo 'class="errore"'; // Evidenzia il campo
+            } ?> >
+            <?php if (isset($errori["prezzo"])) { // Controlla se esiste un errore ?>
+                <p class="msg-errore"><?= $errori["prezzo"] ?></p> <!-- Mostra l'errore -->
+            <?php } ?>
+
+            <label for="sconto">Sconto</label> <!-- Etichetta sconto -->
+            <input type="text" id="sconto" name="sconto" value="<?= htmlspecialchars($sconto) ?>"
+            <?php if (isset($errori["sconto"])) { // Controlla se esiste un errore
+                echo 'class="errore"'; // Evidenzia il campo
+            } ?> >
+            <?php if (isset($errori["sconto"])) { // Controlla se esiste un errore ?>
+                <p class="msg-errore"><?= $errori["sconto"] ?></p> <!-- Mostra l'errore -->
+            <?php } ?>
+
+            <button type="submit">Calcola</button> <!-- Invia il modulo -->
+        </form>
+
+    <?php } ?>
+
+    <!-- FLASH CARD -->
+    <?php if ($calcoloeseguito) { ?>
+        <div class="risultato">
+            <h2>RISULTATO</h2>
+            <h4><?= htmlspecialchars($prodotto) ?></h4>
+            <h1><?= number_format($prezzofinale, 2, ",", ".") ?> €</h1>
+            <p>Prezzo iniziale: <?= number_format($prezzo, 2, ",", ".") ?> €</p>
+            <p>Risparmio: <?= number_format($risparmio, 2, ",", ".") ?> €</p>
+            <p>Sconto: <?= $sconto ?>%</p>
+            <h3><?= $fascia ?></h3>
         </div>
     <?php } ?>
 

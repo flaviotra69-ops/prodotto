@@ -6,3 +6,8 @@ input, button { width: 100%; padding: 8px; box-sizing: border-box; }
 button { margin-top: 20px; background: #1F2328; color: white; border: none; border-radius: 8px; }
 .errore { border: 2px solid #B32D2D; }
 .msg-errore { color: #B32D2D; font-size: 13px; margin: 4px 0 0; }
+.risultato { width: 300px; margin: 25px auto; padding: 20px; background: white; border-radius: 12px; box-shadow: 0 4px 10px #999; }
+.risultato h1 { font-size: 32px; }
+.risultato h2 { color: #1F2328; }
+.risultato h3 { color: #218838; }
+.risultato h4{ color:  black}
